@@ -1,7 +1,5 @@
 # React 16.4开发简书项目 从零基础入门到实战
 
-    Immutable.js，React-redux,React-router4 
-
 > 练习代码库
 
 ## 第2章 React初探
