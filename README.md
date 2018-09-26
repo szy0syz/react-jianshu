@@ -109,6 +109,19 @@ export const Nav = styled.div`
 
 reducer如果存放过多数据，可能会造成代码的不可维护，那么我们把一个reducer拆分成很多个子reducer，最终再做一个整合即可。
 
+### 7-8 actionCreators与constants的应用拆分数据
+
+首先在header组件的store里创建 `actionCreators.js`，用于返回action函数
+
+再创建 `actionTypes.js`，用于存储action type的常量
+
+```js
+// 'header' 表示命名空间，防止命名冲突
+export const SEARCH_FOCUS = 'header/SEARCH_FOCUS'
+``
+
+在header组件的store里统一对外导出 `index.js` 文件，方便导出变量管理。这样我们就把一个组件展示的代码和数据管理的代码统一放到了一个文件夹下，这样以后管理组件就很方便迭代了
+
 ## 第8章 项目：首页开发
 
 ## 第9章 项目：详情页面和登录功能开发
