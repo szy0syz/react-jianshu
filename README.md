@@ -85,6 +85,12 @@ export const Nav = styled.div`
 
 使用icon时，先拿到图标唯一的 `unicode` 名称，然后直接 `<i className="iconfont">&#xe636;</i>` 使用即可。
 
+### 7-5 使用transition-group实现头部搜索框动画
+
+`CSSTransition`组件其实会帮你在内部组件被挂载到页面前，会把外层的组件上挂载一堆css样式，样式名就是你自定义的`classNames`，款式如：`.slide-enter` `.slide-enter-active` `.slide-exit` `.slide-exit-active`等等，此时就可以在这些样式内写自己的动画代码
+
+    其实和Vue的动画使用方式一样的
+
 ## 第8章 项目：首页开发
 
 ## 第9章 项目：详情页面和登录功能开发

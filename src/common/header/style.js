@@ -50,6 +50,18 @@ export const NavItem = styled.div`
 export const SearchWarpper = styled.div`
   position: relative;  
   float: left;
+  .slide-enter {
+    transition: all .33s ease-out;
+  }
+  .slide-enter-active {
+    width: 260px;
+  }
+  .slide-exit {
+    transition: all .33s ease-out;
+  }
+  .slide-exit-active {
+    width: 180px;
+  }
   .iconfont {
     position: absolute;
     right: 5px;
@@ -58,6 +70,11 @@ export const SearchWarpper = styled.div`
     line-height: 30px;
     border-radius: 15px;
     text-align: center;
+
+    &.focused {
+      background: #777;
+      color: #fff;
+    }
   }
 `
 
@@ -66,18 +83,23 @@ export const NavSearch = styled.input.attrs({
   placeholder: '搜索'
 })`
   height: 38px;
-  width: 160px
+  width: 180px
   border: none;
   outline: none;
   border-radius: 19px;
   background: #eee;
   margin-top: 9px;
-  padding: 0 20px;
+  padding: 0 30px 0 20px;
   box-sizing: border-box;
   font-size: 14px;
   margin-left: 20px;
+  color: #666;
   &::placeholder {
     color: #999;
+  }
+  &.focused {
+    width: 260px;
+    .iconfont
   }
 `
 
