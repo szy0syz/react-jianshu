@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { CSSTransition } from 'react-transition-group'
 import {
   HeaderWrapper,
@@ -14,9 +15,6 @@ import {
 class Header extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-      isFocused: false
-    }
     this.handleInputFocus = this.handleInputFocus.bind(this)
     this.handleInputBlur = this.handleInputBlur.bind(this)
   }
@@ -32,14 +30,14 @@ class Header extends Component {
             <i className="iconfont">&#xe636;</i>
           </NavItem>
           <SearchWarpper>
-            <CSSTransition in={this.state.isFocused} timeout={330} classNames="slide">
+            <CSSTransition in={this.props.isFocused} timeout={330} classNames="slide">
               <NavSearch
-                className={this.state.isFocused ? 'focused' : ''}
+                className={this.props.isFocused ? 'focused' : ''}
                 onFocus={this.handleInputFocus}
                 onBlur={this.handleInputBlur}
               />
             </CSSTransition>
-            <i className={this.state.isFocused ? 'iconfont focused' : 'iconfont'}>
+            <i className={this.props.isFocused ? 'iconfont focused' : 'iconfont'}>
               &#xe62d;
             </i>
           </SearchWarpper>
@@ -60,7 +58,7 @@ class Header extends Component {
       isFocused: true
     })
   }
-
+  // 7-6 [15:31]
   handleInputBlur() {
     this.setState({
       isFocused: false
@@ -68,4 +66,14 @@ class Header extends Component {
   }
 }
 
-export default Header
+const mapStateToProps = (state) => {
+  return {
+    isFocused: state.isFocused
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header)
