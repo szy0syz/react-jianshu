@@ -49,7 +49,7 @@ class Header extends Component {
 export const HeaderWrapper = styled.div`
   position: relative;
   height: 56px;
-  border-bottom: 1px solid #f0f0f0; 
+  border-bottom: 1px solid #f0f0f0;
 `
 export const Logo = styled.a.attrs({
   href: '/'
@@ -83,7 +83,7 @@ export const Nav = styled.div`
 
 在网站选好图标后，只需要 `.eot` `.css` `.svg` `.ttf` `.woff` 文件引入项目，修改 `.css` 为 js 文件，然后使用 `import { injectGlobal } from 'styled-components'` 全局注入项目样式中。其中还需要修改 `url()` 的路径，以便方便webpack打包。
 
-使用icon时，先拿到图标唯一的 `unicode` 名称，然后直接 `<i className="iconfont">&#xe636;</i>` 使用即可。
+使用icon时，先拿到图标唯一的 `unicode` 名称，然后直接 `<i className="iconfont">&#xe636;</i>` 使用即可
 
 ### 7-5 使用transition-group实现头部搜索框动画
 
@@ -98,6 +98,10 @@ export const Nav = styled.div`
 `sotre` 好比一个实例仓库管理，但它不知道如何管理货物进出，得招聘一个 `reducer` 仓管员给仓库才行！
 
 `reducer` 导出的必须是一个纯函数：给定一个固定的输入，必须返回一个固定的输出
+
+使用reduc的dispatch出action改变reduc中的state
+
+最终Header组件被拆解为一个“无状态组件”，如果这样，其实我们又可以把这个组件写成一个 “**函数**”。如果把一个组件写成无状态组件后，它的性能和可测试性都有提高
 
 ## 第8章 项目：首页开发
 
