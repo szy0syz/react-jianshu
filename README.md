@@ -103,6 +103,12 @@ export const Nav = styled.div`
 
 最终Header组件被拆解为一个“无状态组件”，如果这样，其实我们又可以把这个组件写成一个 “**函数**”。如果把一个组件写成无状态组件后，它的性能和可测试性都有提高
 
+### 7-7 使用combineReducers对数据拆分管理
+
+`redux-devtools-extension`
+
+reducer如果存放过多数据，可能会造成代码的不可维护，那么我们把一个reducer拆分成很多个子reducer，最终再做一个整合即可。
+
 ## 第8章 项目：首页开发
 
 ## 第9章 项目：详情页面和登录功能开发
