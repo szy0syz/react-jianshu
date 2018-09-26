@@ -118,9 +118,21 @@ reducer如果存放过多数据，可能会造成代码的不可维护，那么�
 ```js
 // 'header' 表示命名空间，防止命名冲突
 export const SEARCH_FOCUS = 'header/SEARCH_FOCUS'
-``
+```
 
 在header组件的store里统一对外导出 `index.js` 文件，方便导出变量管理。这样我们就把一个组件展示的代码和数据管理的代码统一放到了一个文件夹下，这样以后管理组件就很方便迭代了
+
+### 7-9 使用immutable来管理store中的数据
+
+`immutable.js`这个库是Facebook耗时三年开发的一个库，它可以帮助我们生成一个 `immutable` 对象，这个对象是不可改变的。假设 reducer 中的 state 是一个 immutable 对象，那么 state 就不可以被改变，那么reducer就不会出问题
+
+使用步骤：
+
+* `import { fromJS } from 'immutable'`
+* `const defaultState = fromJS({ isFocused: false })`
+* `isFocused: state.header.get('isFocused')` 在业务组件中修改 mapStateToProps 的方式
+* 回到header组件的reducer中，此时不能直接使用 `{ isFocused: true }`，因为次吃state是一个 immutable对象，是不允许修改的，所有我们得用 `set()` 方法
+* 接着immutable对象的set方法，会结合之前 immutable 对象的值和设置的值，返回一个 [全新的对象]，其实set方法并不会去改变原先对象里的值！
 
 ## 第8章 项目：首页开发
 
