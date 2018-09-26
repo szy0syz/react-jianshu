@@ -134,6 +134,14 @@ export const SEARCH_FOCUS = 'header/SEARCH_FOCUS'
 * 回到header组件的reducer中，此时不能直接使用 `{ isFocused: true }`，因为次吃state是一个 immutable对象，是不允许修改的，所有我们得用 `set()` 方法
 * 接着immutable对象的set方法，会结合之前 immutable 对象的值和设置的值，返回一个 [全新的对象]，其实set方法并不会去改变原先对象里的值！
 
+### 7-10 使用redux-immutable统一数据格式
+
+`state.header.get('isFocused')` 这段代码，第一个 `.` 是js方式的获取属性，但回去到的是 immutable 对象，再接着又用 `.get` 的immutable 方式获取属性，这样就是获取数据的不统一
+
+原来这样获取`import { combineReducers } from 'redux'`，现在这样获取`import { combineReducers } from 'redux-immutable'`，用redux-immutable导出的combineReducers函数返回的就是一个immutable对象
+
+此时，项目从头到尾的架子基本打完，接下来就是往架子上挂肉的过程，那这个过程就会简单很多
+
 ## 第8章 项目：首页开发
 
 ## 第9章 项目：详情页面和登录功能开发
