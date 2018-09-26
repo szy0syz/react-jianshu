@@ -46,6 +46,21 @@ export const NavItem = styled.div`
     color: #ea6f5a;
   }
 `
+
+export const SearchWarpper = styled.div`
+  position: relative;  
+  float: left;
+  .iconfont {
+    position: absolute;
+    right: 5px;
+    bottom: 5px;
+    width: 30px;
+    line-height: 30px;
+    border-radius: 15px;
+    text-align: center;
+  }
+`
+
 // &::placeholder 表示当前组件下的 placeholder
 export const NavSearch = styled.input.attrs({
   placeholder: '搜索'
