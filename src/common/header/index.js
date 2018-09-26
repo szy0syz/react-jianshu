@@ -7,9 +7,7 @@ class Header extends Component {
     return (
       <HeaderWrapper>
         <Logo />
-        <Nav>
-          
-        </Nav>
+        <Nav></Nav>
       </HeaderWrapper>
     )
   }
