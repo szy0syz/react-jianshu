@@ -42,8 +42,8 @@ class Header extends Component {
         >
           <SearchInfoTitle>
             热门搜索
-            <SearchInfoSwitch onClick={() => handleChangePage(page, totalPage)}>
-              <i className="iconfont">&#xe851;</i>
+            <SearchInfoSwitch onClick={() => handleChangePage(page, totalPage, this.spinIcon)}>
+              <i ref={(icon) => { this.spinIcon = icon }} className="iconfont spin">&#xe851;</i>
               换一批
             </SearchInfoSwitch>
           </SearchInfoTitle>
@@ -75,7 +75,7 @@ class Header extends Component {
                 onBlur={handleInputBlur}
               />
             </CSSTransition>
-            <i className={isFocused ? "iconfont focused" : "iconfont"}>
+            <i className={isFocused ? "iconfont focused zoom" : "iconfont zoom"}>
               &#xe62d;
             </i>
             {this.getListArea()}
@@ -118,7 +118,14 @@ const mapDispatchToProps = dispatch => {
     handleMouseLeave() {
       dispatch(actionCreators.mouseLeave())
     },
-    handleChangePage(page, totalPage) {
+    handleChangePage(page, totalPage, spin) {
+      let originAngle = spin.style.transform.replace(/[^0-9]/ig, '')
+      if (originAngle) {
+        originAngle = parseInt(originAngle, 10)
+      } else {
+        originAngle = 0
+      }
+      spin.style.transform = `rotate(${originAngle + 360}deg)`
       if (page < totalPage - 1) {
         dispatch(actionCreators.changePage(page + 1))
       } else {
