@@ -18,9 +18,8 @@ export const HomeLeft = styled.div`
 `
 
 export const HomeRight = styled.div`
-  width: 240px;
+  width: 280px;
   float: right;
-  background: blue;
 `
 
 export const TopicWrapper = styled.div`
@@ -66,18 +65,45 @@ export const ListItem = styled.div`
 `
 
 export const ListInfo = styled.div`
-width: 500px;
-float: left;
-.title {
-  line-height: 27px;
-  font-size: 18px;
-  font-weight: blod;
-  color: #333;
-}
-.desc {
-  line-height: 24px;
-  font-size: 13px;
-  color: #999;
-}
+  width: 500px;
+  float: left;
+  .title {
+    line-height: 27px;
+    font-size: 18px;
+    font-weight: blod;
+    color: #333;
+  }
+  .desc {
+    line-height: 24px;
+    font-size: 13px;
+    color: #999;
+  }
 `
 
+export const RecommendWrapper = styled.div`
+  width: 280px;
+  margin: 30px 0;
+`
+
+export const RecommendItem = styled.div`
+  width: 280px;
+  height: 50px;
+  background: url(${(props) => props.cover});
+  background-size: contain;
+`
+
+export const WriterWrapper = styled.div`
+  width: 278px;
+  border: 1px solid #dcdcdc;
+  border-radius: 3px;
+  height: 300px;
+  line-height: 300px;
+  text-align: center;
+`
+
+export const WriterItem = styled.div`
+  width: 280px;
+  height: 50px;
+  background: url(${(props) => props.cover});
+  background-size: contain;
+`
