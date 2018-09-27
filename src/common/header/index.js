@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { CSSTransition } from 'react-transition-group'
-import { actionCreators } from './store'
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { CSSTransition } from "react-transition-group";
+import { actionCreators } from "./store";
 import {
   HeaderWrapper,
   Logo,
@@ -16,32 +16,44 @@ import {
   SearchInfoTitle,
   SearchInfoSwitch,
   SearchWarpper
-} from './style'
+} from "./style";
 
 class Header extends Component {
   getListArea = () => {
-    const { isFocused, list } = this.props
-    if (isFocused) {
+    const { isFocused, isMouseIn, list, page, totalPage, handleChangePage, handleMouseEnter, handleMouseLeave } = this.props;
+    let jsList = list.toJS() || []
+    let pageList = []
+
+    if (jsList.length) {
+      for (let i = page * 10; i < (page + 1) * 10; i++) {
+        if(jsList[i]) {
+          pageList.push(
+            <SearchInfoItem key={jsList[i]}>{jsList[i]}</SearchInfoItem>
+          )
+        }
+      }
+    }
+
+    if (isFocused || isMouseIn) {
       return (
-        <SearchInfo>
+        <SearchInfo 
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+        >
           <SearchInfoTitle>
             热门搜索
-            <SearchInfoSwitch>换一批</SearchInfoSwitch>
+            <SearchInfoSwitch onClick={() => handleChangePage(page, totalPage)}>换一批</SearchInfoSwitch>
           </SearchInfoTitle>
-          <SearchInfoList>
-            { 
-              list.map((item) => { return <SearchInfoItem key={item}>{item}</SearchInfoItem> })
-            }
-          </SearchInfoList>
+          <SearchInfoList>{pageList}</SearchInfoList>
         </SearchInfo>
-      )
+      );
     } else {
-      return null
+      return null;
     }
-  }
+  };
 
   render() {
-    const { isFocused, handleInputFocus, handleInputBlur } = this.props
+    const { isFocused, handleInputFocus, handleInputBlur } = this.props;
     return (
       <HeaderWrapper>
         <Logo />
@@ -53,18 +65,14 @@ class Header extends Component {
             <i className="iconfont">&#xe636;</i>
           </NavItem>
           <SearchWarpper>
-            <CSSTransition
-              in={isFocused}
-              timeout={330}
-              classNames="slide"
-            >
+            <CSSTransition in={isFocused} timeout={330} classNames="slide">
               <NavSearch
-                className={isFocused ? 'focused' : ''}
+                className={isFocused ? "focused" : ""}
                 onFocus={handleInputFocus}
                 onBlur={handleInputBlur}
               />
             </CSSTransition>
-            <i className={isFocused ? 'iconfont focused' : 'iconfont'}>
+            <i className={isFocused ? "iconfont focused" : "iconfont"}>
               &#xe62d;
             </i>
             {this.getListArea()}
@@ -78,31 +86,46 @@ class Header extends Component {
           <Button className="reg">注册</Button>
         </Addition>
       </HeaderWrapper>
-    )
+    );
   }
 }
 
 const mapStateToProps = state => {
   return {
-    // isFocused: state.get('header').get('isFocused')
+    isMouseIn: state.getIn(['header', 'isMouseIn']),
     isFocused: state.getIn(['header', 'isFocused']),
-    list: state.getIn(['header', 'list'])
-  }
-}
+    list: state.getIn(['header', 'list']),
+    page: state.getIn(['header', 'page']),
+    totalPage: state.getIn(['header', 'totalPage'])
+  };
+};
 
 const mapDispatchToProps = dispatch => {
   return {
     handleInputFocus() {
-      dispatch(actionCreators.getList())
-      dispatch(actionCreators.searchFoucs())
+      dispatch(actionCreators.getList());
+      dispatch(actionCreators.searchFoucs());
     },
     handleInputBlur() {
-      dispatch(actionCreators.searchBlur())
+      dispatch(actionCreators.searchBlur());
+    },
+    handleMouseEnter() {
+      dispatch(actionCreators.mouseEnter())
+    },
+    handleMouseLeave() {
+      dispatch(actionCreators.mouseLeave())
+    },
+    handleChangePage(page, totalPage) {
+      if (page < totalPage - 1) {
+        dispatch(actionCreators.changePage(page + 1))
+      } else {
+        dispatch(actionCreators.changePage(0))
+      }
     }
-  }
-}
+  };
+};
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Header)
+)(Header);

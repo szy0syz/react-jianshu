@@ -190,6 +190,16 @@ const changeList = (data) => ({
 解构 `this.props`
 `if` 转 `switch`
 
+### 7-14 热门搜索换页功能实现
+
+```js
+// return state.set('list', action.data).set('totalPage', action.totalPage)
+return state.merge({
+  list: action.data,
+  totalPage: action.totalPage
+})
+```
+
 ## 第8章 项目：首页开发
 
 ## 第9章 项目：详情页面和登录功能开发

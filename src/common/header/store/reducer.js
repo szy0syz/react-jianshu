@@ -3,7 +3,10 @@ import { fromJS } from 'immutable'
 
 const defaultState = fromJS({
   isFocused: false,
-  list: []
+  isMouseIn: false,
+  list: [],
+  page: 0,
+  totalPage: 1
 })
 
 // reducer 导出的必须是一个纯函数：给定一个固定的输入，必须返回一个固定的输出
@@ -16,7 +19,17 @@ export default ( state = defaultState, action) => {
     case actionTypes.SEARCH_BLUR:
       return state.set('isFocused', false)
     case actionTypes.CHANGE_LIST:
-      return state.set('list', action.data)
+      // return state.set('list', action.data).set('totalPage', action.totalPage)
+      return state.merge({
+        list: action.data,
+        totalPage: action.totalPage
+      })
+    case actionTypes.MOUSE_ENTER:
+      return state.set('isMouseIn', true)
+    case actionTypes.MOUSE_LEAVE:
+      return state.set('isMouseIn', false)
+      case actionTypes.CHANGE_PAGE:
+      return state.set('page', action.page)
     default:
       return state
   } 
