@@ -3,6 +3,8 @@ import Tpoic from './components/Topic'
 import List from './components/List'
 import Recommend from './components/Recommend'
 import Writer from './components/Writer'
+import axios from 'axios'
+import { connect } from 'react-redux'
 import { HomeWrapper, HomeLeft, HomeRight } from './styled'
 
 class Home extends Component {
@@ -21,6 +23,25 @@ class Home extends Component {
       </HomeWrapper>
     ) 
   }
+
+  componentDidMount() {
+    axios.get('/api/home.json').then(res => {
+      const data = res.data
+      const action = {
+        type: 'fetch_home_data',
+        topicList: data.topicList,
+        articleList: data.articleList,
+        recommendList: data.recommendList
+      }
+      this.props.fetchHomeData(action)
+    })
+  }
 }
 
-export default Home
+const mapDispatch = (dispatch) => ({
+  fetchHomeData(action) {
+    dispatch(action)
+  }
+})
+
+export default connect(null, mapDispatch)(Home)
