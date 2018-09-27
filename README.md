@@ -249,6 +249,16 @@ return (
 
 ### 8-2 首页组件的拆分
 
+### 8-3 首页专题区域布局及reducer的设计
+
+创建 Home 组件的 redux 流程
+
+* 在组件下新建 store 文件夹，随后创建 `index.js` `reducer.js` `actionTypes.js` `actionCretors.js`
+* 在根目录的 store 文件夹下找到 `store.js` 文件，将 Home 组件的 reduxer 引入并使用 `home: HomeReducer`
+* 引入 `connect`，替换 Topic组件默认导出的组件，`connect()(Topic)` 这样表示这个组件和 Provider 相连接
+* 但在导出 Topic 组件前，还得准备 mapState 和 mapDispatch 函数当作 `connect` 函数的参数
+* 在 mapState 函数里 `list: state.get('home').get('topicList')` 把store里的immutable对象映射该组件的props上即可
+
 ## 第9章 项目：详情页面和登录功能开发
 
 ## 第10章 课程总结
