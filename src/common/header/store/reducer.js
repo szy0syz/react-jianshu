@@ -2,7 +2,8 @@ import * as actionTypes from './actionTypes'
 import { fromJS } from 'immutable'
 
 const defaultState = fromJS({
-  isFocused: false
+  isFocused: false,
+  list: []
 })
 
 // reducer 导出的必须是一个纯函数：给定一个固定的输入，必须返回一个固定的输出
@@ -15,6 +16,10 @@ export default ( state = defaultState, action) => {
 
   if (action.type === actionTypes.SEARCH_BLUR) {
     return state.set('isFocused', false)
+  }
+
+  if (action.type === actionTypes.CHANGE_LIST) {
+    return state.set('list', action.data)
   }
 
   return state

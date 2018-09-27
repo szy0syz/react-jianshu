@@ -146,6 +146,45 @@ export const SEARCH_FOCUS = 'header/SEARCH_FOCUS'
 
 创建了在 `isFocused` 为 `true` 时，通过js代码直接把样式放到页面中去，不用css控制，这点可能太过于极端？
 
+### 7-12 Ajax获取热门推荐
+
+获取异步数据不能直接写在组件里，我们需要把异步操作放在action或者redux-sega里处理，该项目我们统一使用redux-thunk中间件用action来处理
+
+`redux-thunk`是redux的一个中间件，它使得我们可以
+
+```js
+const store = createStore(reducer, composeEnhancers(
+  applyMiddleware(thunk)
+))
+```
+
+如何在`create-react-app`项目中mock数据呢？
+
+其实在 `create-react-app` 底层也运行着一个node服务器，当访问`/api/headerList.json`时，node服务器会先到工程目录下看有没有这样的路由，如果找不到，就会去`/public`目录下去找，如果找到就把这个文件返回，如果没找到返回404错误
+
+问题：
+
+```js
+const defaultState = fromJS({
+  isFocused: false,
+  list: []    // 此时，list属性对应的数据已经被immutable转换成了immutable的数据，不再是一个普通数据
+})
+
+// return state.set('list', action.data)
+// 而在reducer里，我们尝试用action.data这个普通的js数据赋值给 immutable-array数据时，一定是报错的
+```
+
+解决：在源头 `actionCreators`里发送前就把js-array转换成immutable-array就可以了
+
+```js
+const changeList = (data) => ({
+  type: actionTypes.CHANGE_LIST,
+  data: fromJS(data)
+})
+```
+
+    注意：在组件的 render 中使用 `mapStateToProps` 后，props 仍然是 immutable对象，但immutable-array仍然提供一些数组的基本方法
+
 ## 第8章 项目：首页开发
 
 ## 第9章 项目：详情页面和登录功能开发
