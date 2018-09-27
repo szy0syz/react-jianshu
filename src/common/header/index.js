@@ -20,7 +20,8 @@ import {
 
 class Header extends Component {
   getListArea = () => {
-    if (this.props.isFocused) {
+    const { isFocused, list } = this.props
+    if (isFocused) {
       return (
         <SearchInfo>
           <SearchInfoTitle>
@@ -28,10 +29,8 @@ class Header extends Component {
             <SearchInfoSwitch>换一批</SearchInfoSwitch>
           </SearchInfoTitle>
           <SearchInfoList>
-            {
-              this.props.list.map((item) => {
-                return <SearchInfoItem key={item}>{item}</SearchInfoItem>
-              })
+            { 
+              list.map((item) => { return <SearchInfoItem key={item}>{item}</SearchInfoItem> })
             }
           </SearchInfoList>
         </SearchInfo>
@@ -42,6 +41,7 @@ class Header extends Component {
   }
 
   render() {
+    const { isFocused, handleInputFocus, handleInputBlur } = this.props
     return (
       <HeaderWrapper>
         <Logo />
@@ -54,17 +54,17 @@ class Header extends Component {
           </NavItem>
           <SearchWarpper>
             <CSSTransition
-              in={this.props.isFocused}
+              in={isFocused}
               timeout={330}
               classNames="slide"
             >
               <NavSearch
-                className={this.props.isFocused ? 'focused' : ''}
-                onFocus={this.props.handleInputFocus}
-                onBlur={this.props.handleInputBlur}
+                className={isFocused ? 'focused' : ''}
+                onFocus={handleInputFocus}
+                onBlur={handleInputBlur}
               />
             </CSSTransition>
-            <i className={this.props.isFocused ? 'iconfont focused' : 'iconfont'}>
+            <i className={isFocused ? 'iconfont focused' : 'iconfont'}>
               &#xe62d;
             </i>
             {this.getListArea()}

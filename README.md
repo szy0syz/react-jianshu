@@ -185,6 +185,11 @@ const changeList = (data) => ({
 
     注意：在组件的 render 中使用 `mapStateToProps` 后，props 仍然是 immutable对象，但immutable-array仍然提供一些数组的基本方法
 
+### 7-13 代码优化微调
+
+解构 `this.props`
+`if` 转 `switch`
+
 ## 第8章 项目：首页开发
 
 ## 第9章 项目：详情页面和登录功能开发
