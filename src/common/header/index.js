@@ -26,7 +26,7 @@ class Header extends Component {
 
     if (jsList.length) {
       for (let i = page * 10; i < (page + 1) * 10; i++) {
-        if(jsList[i]) {
+        if (jsList[i]) {
           pageList.push(
             <SearchInfoItem key={jsList[i]}>{jsList[i]}</SearchInfoItem>
           )
@@ -36,7 +36,7 @@ class Header extends Component {
 
     if (isFocused || isMouseIn) {
       return (
-        <SearchInfo 
+        <SearchInfo
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >
@@ -56,7 +56,7 @@ class Header extends Component {
   };
 
   render() {
-    const { isFocused, handleInputFocus, handleInputBlur } = this.props;
+    const { isFocused, handleInputFocus, handleInputBlur, list } = this.props;
     return (
       <HeaderWrapper>
         <Logo />
@@ -71,7 +71,7 @@ class Header extends Component {
             <CSSTransition in={isFocused} timeout={330} classNames="slide">
               <NavSearch
                 className={isFocused ? "focused" : ""}
-                onFocus={handleInputFocus}
+                onFocus={() => handleInputFocus(list)}
                 onBlur={handleInputBlur}
               />
             </CSSTransition>
@@ -105,12 +105,13 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    handleInputFocus() {
-      dispatch(actionCreators.getList());
-      dispatch(actionCreators.searchFoucs());
+    handleInputFocus(list) {
+      // 注意：这里的list是immutable-array，没有length的
+      (list.size === 0) && dispatch(actionCreators.getList())
+      dispatch(actionCreators.searchFoucs())
     },
     handleInputBlur() {
-      dispatch(actionCreators.searchBlur());
+      dispatch(actionCreators.searchBlur())
     },
     handleMouseEnter() {
       dispatch(actionCreators.mouseEnter())

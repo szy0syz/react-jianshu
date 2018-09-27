@@ -204,6 +204,13 @@ return state.merge({
 
 React实现动画的另一种方式：首先用 `ref` 获取DOM元素，然后再用`transition`初始化动画，最后在handler方法中改变dom元素style属性来驱动动画即可
 
+### 7-16
+
+```js
+// 注意：这里的list是immutable-array，没有length的
+(list.size === 0) && dispatch(actionCreators.getList())
+```
+
 ## 第8章 项目：首页开发
 
 ## 第9章 项目：详情页面和登录功能开发
