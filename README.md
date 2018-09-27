@@ -259,6 +259,10 @@ return (
 * 但在导出 Topic 组件前，还得准备 mapState 和 mapDispatch 函数当作 `connect` 函数的参数
 * 在 mapState 函数里 `list: state.get('home').get('topicList')` 把store里的immutable对象映射该组件的props上即可
 
+### 8-4 首页文章列表制作
+
+    又复习了一道redux执行流程
+
 ## 第9章 项目：详情页面和登录功能开发
 
 ## 第10章 课程总结

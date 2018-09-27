@@ -5,7 +5,7 @@ import { TopicWrapper, TopicItem } from '../styled'
 class Topic extends Component {
   render() {
     const { list } = this.props
-    return(
+    return (
       <TopicWrapper>
         {
           list.map(item => (
@@ -25,11 +25,10 @@ class Topic extends Component {
 }
 
 const mapState = (state) => ({
-  list: state.get('home').get('topicList')
+  list: state.getIn(['home', 'topicList'])
 })
 
-const mapDispatch = (dispatch) => ({
+// const mapDispatch = (dispatch) => ({
+// })
 
-})
-
-export default connect(mapState, mapDispatch)(Topic)
+export default connect(mapState, null)(Topic)
