@@ -204,7 +204,7 @@ return state.merge({
 
 React实现动画的另一种方式：首先用 `ref` 获取DOM元素，然后再用`transition`初始化动画，最后在handler方法中改变dom元素style属性来驱动动画即可
 
-### 7-16
+### 7-16 避免发送重复ajax请求
 
 ```js
 // 注意：这里的list是immutable-array，没有length的
@@ -212,6 +212,38 @@ React实现动画的另一种方式：首先用 `ref` 获取DOM元素，然后�
 ```
 
 ## 第8章 项目：首页开发
+
+### 8-1 react-router-dom的基本使用
+
+`yarn add react-router-dom`
+
+```js
+// 未使用路由前，无论访问哪个路径，都是显示一个 Header 组件
+return (
+  <Provider store={store}>
+    <Header />
+  </Provider>
+)
+```
+
+```js
+// 开始使用路由，先引用
+import { BrowserRouter, Route } from 'react-router-dom'
+
+// 把 BrowerHitory 当成一个组件 包裹在需要切换路由显示的位置
+// 此时 BrowerHitory 中间部分就是会切换显示的内容
+return (
+  <Provider store={store}>
+    <Header />
+    <BrowserRouter>
+      <Fragment>
+        <Route path='/' exact render={() => <div>Home</div>}></Route>
+        <Route path='/detail' exact render={() => <div>Detail</div>}></Route>
+      </Fragment>
+    </BrowserRouter>
+  </Provider>
+)
+```
 
 ## 第9章 项目：详情页面和登录功能开发
 

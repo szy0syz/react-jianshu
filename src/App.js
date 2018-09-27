@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Provider } from 'react-redux'
+import { BrowserRouter, Route } from 'react-router-dom'
 import Header from './common/header'
 import store from './store'
 
@@ -9,9 +10,17 @@ class App extends Component {
     // 或者：Provider 把 store 这些数据都提供给了它内部的这些组件
     return (
       <Provider store={store}>
-        <Header/>
+        <Fragment>
+          <Header />
+          <BrowserRouter>
+            <Fragment>
+              <Route path='/' exact render={() => <div>Home</div>}></Route>
+              <Route path='/detail' exact render={() => <div>Detail</div>}></Route>
+            </Fragment>
+          </BrowserRouter>
+        </Fragment>
       </Provider>
-    );
+    )
   }
 }
 
