@@ -271,7 +271,24 @@ return (
 
 重构homepage-reducer
 
-在组件中绑定的事件，必须在销毁组件时删除绑定
+[★React小技巧★] 在组件创建时所绑定的事件，必须在销毁组件时删除绑定。因为如果是SPA就麻烦了。
+
+### 8-10 首页性能调优及路由跳转
+
+在目前组件中，很多组件都用connect函数包裹，这样只要正颗state树的某孙子属性跟新，这些组件也被迫更新，这样会大大影响性能！所以解决方案：
+
+* 手写 `shouldCompoentsUpdate` 生命周期函数
+* 改用 `PureComponent` 代替 `Comppnent`
+
+[★React小技巧★] 如果使用 `PureComponent`时，必须结合使用 `immutable` 数据格式管理数据，否则没用直接 使用 `PureComponent` 就会触发React底层的坑！
+
+什么叫 单页应用程序(SPA) ？SPA指的是不管你怎么做页面的跳转，整个网站的只会加载一个(一次)HTML文件。
+
+为了保证每次跳转都是 SPA式跳转 我们得用 react-router-dom 包中的 `<Link>` 组件
+
+之前在Header组件的 logo 组件 我们使用了 a标签 的直接跳转，现在得修复成用 `<Link>` 组件
+
+在 `<BrowserRouter></BrowserRouter>` 的路由组件中只能有一个 `child`
 
 ## 第9章 项目：详情页面和登录功能开发
 

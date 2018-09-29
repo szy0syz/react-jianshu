@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import { FooterWrapper } from './styled'
 
-class Footer extends Component {
+class Footer extends PureComponent {
   render() {
     return(
       <FooterWrapper>Footer</FooterWrapper>
