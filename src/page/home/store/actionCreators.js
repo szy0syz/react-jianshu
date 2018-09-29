@@ -32,3 +32,8 @@ export const getMoreList = (page) => {
     })
   }
 }
+
+export const toggleTopShow = (value) => ({
+  type: actionTypes.TOGGLE_TOP_SHOW,
+  show: value
+})
