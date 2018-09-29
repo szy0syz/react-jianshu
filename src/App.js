@@ -4,6 +4,7 @@ import { BrowserRouter, Route } from 'react-router-dom'
 import Home from './page/home'
 import Detail from './page/detail'
 import Header from './common/header'
+import Footer from './common/footer'
 import store from './store'
 
 class App extends Component {
@@ -20,6 +21,7 @@ class App extends Component {
               <Route path='/detail' exact component={Detail}></Route>
             </Fragment>
           </BrowserRouter>
+          <Footer></Footer>
         </Fragment>
       </Provider>
     )
