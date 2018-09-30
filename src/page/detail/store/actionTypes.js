@@ -1,1 +1,1 @@
-export const CHANGE_HOME_DATA = 'home/CHANGE_HOME_DATA'
+export const CHANGE_DETAIL_DATA = 'home/CHANGE_DETAIL_DATA'
