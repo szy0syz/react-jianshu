@@ -17,7 +17,7 @@ class App extends PureComponent {
           <Fragment>
             <Header />
             <Route path='/' exact component={Home}></Route>
-            <Route path='/detail' exact component={Detail}></Route>
+            <Route path='/detail/:id' exact component={Detail}></Route>
             <Footer></Footer>
           </Fragment>
         </BrowserRouter>

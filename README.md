@@ -313,4 +313,14 @@ export const Content = styled.div`
 `
 ```
 
+### 9-4 页面路由参数的传递
+
+react动态路由：
+
+先改路由匹配
+
+再传值
+
+最后组件内取值 `this.props.match.params.id`
+
 ## 第10章 课程总结

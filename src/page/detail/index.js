@@ -14,7 +14,7 @@ class Detail extends PureComponent {
   }
 
   componentDidMount() {
-    this.props.getDetail('28367')
+    this.props.getDetail(this.props.match.params.id)
   }
 }
 
