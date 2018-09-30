@@ -292,4 +292,25 @@ return (
 
 ## 第9章 项目：详情页面和登录功能开发
 
+### 9-1 详情页布局
+
+在写文章内部布局时，可以分别对标签写样式
+
+```js
+export const Content = styled.div`
+  color: #2f2f2f;
+  img {
+    width: 100%;
+  }
+  p {
+    margin: 25px 0;
+    font-size: 16px;
+    line-height: 30px;
+  }
+  b {
+    font-weight:bold;
+  }
+` 
+```
+
 ## 第10章 课程总结
