@@ -315,12 +315,12 @@ export const Content = styled.div`
 
 ### 9-4 页面路由参数的传递
 
-react动态路由：
+react动态路由：先改路由匹配  -> 再传值 -> 最后组件内取值 `this.props.match.params.id`
 
-先改路由匹配
+### 9-6 实现登录功能
 
-再传值
+我们可以在 `Header` 组件中 条用 `Login` 组件的 `actionCreators`，因为每个组件可以操作的state 仅限于它自己范围内的，如果改变别人的 state 得让别人的 `actionCreators` 来发起
 
-最后组件内取值 `this.props.match.params.id`
+render函数后可以跟 if 根据不同情况返回 对应jsx
 
 ## 第10章 课程总结

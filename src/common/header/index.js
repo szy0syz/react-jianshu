@@ -2,6 +2,7 @@ import React, { PureComponent } from "react"
 import { connect } from "react-redux"
 import { CSSTransition } from "react-transition-group"
 import { actionCreators } from "./store"
+import { actionCreators as loginActionCreators} from '../../page/login/store'
 import { Link } from 'react-router-dom'
 import {
   HeaderWrapper,
@@ -57,7 +58,7 @@ class Header extends PureComponent {
   };
 
   render() {
-    const { isFocused, handleInputFocus, handleInputBlur, list } = this.props;
+    const { isFocused, handleLogout, handleInputFocus, handleInputBlur, list, isLogined } = this.props;
     return (
       <HeaderWrapper>
         <Link to='/'>
@@ -66,7 +67,11 @@ class Header extends PureComponent {
         <Nav>
           <NavItem className="left active">首页</NavItem>
           <NavItem className="left">下载App</NavItem>
-          <NavItem className="right">登录</NavItem>
+          {
+            isLogined ? 
+              <NavItem onClick={handleLogout} className="right">退出</NavItem> : 
+              <Link to='/login'><NavItem className="right">登录</NavItem></Link>
+          }
           <NavItem className="right">
             <i className="iconfont">&#xe636;</i>
           </NavItem>
@@ -102,12 +107,16 @@ const mapStateToProps = state => {
     isFocused: state.getIn(['header', 'isFocused']),
     list: state.getIn(['header', 'list']),
     page: state.getIn(['header', 'page']),
-    totalPage: state.getIn(['header', 'totalPage'])
+    totalPage: state.getIn(['header', 'totalPage']),
+    isLogined: state.getIn(['login', 'isLogined'])
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
+    handleLogout() {
+      dispatch(loginActionCreators.logout())
+    },
     handleInputFocus(list) {
       // 注意：这里的list是immutable-array，没有length的
       (list.size === 0) && dispatch(actionCreators.getList())
