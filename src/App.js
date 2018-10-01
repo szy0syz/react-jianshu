@@ -2,7 +2,7 @@ import React, { PureComponent, Fragment } from 'react';
 import { Provider } from 'react-redux'
 import { BrowserRouter, Route } from 'react-router-dom'
 import Home from './page/home'
-import Detail from './page/detail'
+import Detail from './page/detail/loadbable'
 import Login from './page/login'
 import Header from './common/header'
 import Footer from './common/footer'

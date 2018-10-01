@@ -323,4 +323,31 @@ react动态路由：先改路由匹配  -> 再传值 -> 最后组件内取值 `t
 
 render函数后可以跟 if 根据不同情况返回 对应jsx
 
+### 9-8 异步组件及withRouter路由方法的使用
+
+React的异步组件底层实现相对比较复杂，我们可以使用第三方封装组件即可：`react-loadable`
+
+[**1**] 在当前组件下创建 `loadable.js` 文件
+
+[**2**] 根据实际业务写 `LoadableComponent`组件
+
+```js
+import React from 'react'
+import Loadable from 'react-loadable'
+const LoadableComponent = Loadable({
+  loader: () => import('./'),
+  loading() {
+    return <div>loading...</div>
+  }
+});
+
+export default () => <LoadableComponent />
+```
+
+    自此，我们就创建了一个异步版的 `detail` 组件。
+
+[**3**] 再修改总路由配置文件，此时我们不能直接引入同步版的组件，我们需要引入 `loadableComponent` b版本的异步组件 `import Detail from './page/detail/loadbable'`
+
+[**4**] 如果组件内使用了动态路由参数，还需要在同步版组件导出时，套一层 withRouter， 这样组件就可以拿到路由参数 `export default connect(mapState, mapDispatch)(withRouter(Detail))`
+
 ## 第10章 课程总结
