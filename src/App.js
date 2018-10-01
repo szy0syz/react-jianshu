@@ -3,6 +3,7 @@ import { Provider } from 'react-redux'
 import { BrowserRouter, Route } from 'react-router-dom'
 import Home from './page/home'
 import Detail from './page/detail'
+import Login from './page/login'
 import Header from './common/header'
 import Footer from './common/footer'
 import store from './store'
@@ -18,6 +19,7 @@ class App extends PureComponent {
             <Header />
             <Route path='/' exact component={Home}></Route>
             <Route path='/detail/:id' exact component={Detail}></Route>
+            <Route path='/login' exact component={Login}></Route>
             <Footer></Footer>
           </Fragment>
         </BrowserRouter>
